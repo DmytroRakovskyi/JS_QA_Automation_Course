@@ -2,3 +2,6 @@
 .vscode
 # ignore obsidian settings
 .obsidian
+# ignore node_modules/
+node_modules/
+#
