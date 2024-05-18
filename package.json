@@ -10,6 +10,11 @@
     "start7": "node js/homeworkjs/task7.js",
     "start8": "node js/homeworkjs/task8.js",
     "start9": "node js/homeworkjs/task9.js",
+    "start10": "node js/homeworkjs/task10.js",
+    "start11": "node js/homeworkjs/task11.js",
+    "start12": "node js/homeworkjs/task12.js",
+
+
     "lint": "eslint ."
   },
   "repository": {
