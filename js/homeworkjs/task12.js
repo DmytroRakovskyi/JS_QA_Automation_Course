@@ -2,8 +2,6 @@
 //№1. Створити обʼєкти animal, dog, bulldog. Обʼєкт bulldog має мати прототип dog. Обʼєкт dog має мати прототип animal. Кожен обʼєкт має містити унікальні властивості (мінімум 1) і методи (мінімум 1). Продемонструвати виклики всіх методів на обʼєкті bulldog.
 //Переробити завдання №1 із ДЗ ДЗ 11. JavaScript - Prototypes & Inheritance із використанням класів.
 
-const { createClassifier } = require("typescript");
-
 console.log("Task 3");
 
 class Animal {
