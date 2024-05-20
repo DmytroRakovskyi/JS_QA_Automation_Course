@@ -85,8 +85,16 @@ function makePuppy(mother, father) {
   const puppy = {
     name: puppyName,
     sex: getRandomSex(),
-    ability: `${motherAbility}, ${fatherAbility}`,
+    ability: [motherAbility, fatherAbility]
   };
+
+const mixProto = Object.assign(
+  Object.create(Object.getPrototypeOf(mother)),
+  mother,
+  father
+);
+Object.setPrototypeOf(puppy, mixProto);
+
 
   return puppy;
 }
