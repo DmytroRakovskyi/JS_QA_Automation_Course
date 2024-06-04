@@ -101,13 +101,16 @@ console.log(result); // 4
 console.log("Task 5");
 // #5. Написати функцію getTopSalary(people) яка повертає ім’я найбільш високооплачуваної особи.
 
-const getTopSalary = (people) => {
+// const getTopSalary = (people) => {
   
 
-// Теперь можно деструктурировать этот массив массивов
-let [name, value] = people;
-    return value
-  };
-let people_5 = { "Іван": 100, "Петро": 300, "Марія": 250 };
+// // Теперь можно деструктурировать этот массив массивов
+// let [name, value] = people5;
+// let people_5 = { "Іван": 100, "Петро": 300, "Марія": 250 };
+//     return value
+//   };
 
-console.log(getTopSalary(people_5)); // Петро
+
+
+
+// console.log(getTopSalary(people_5)); // Петро
