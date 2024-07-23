@@ -101,16 +101,104 @@ console.log(result); // 4
 console.log("Task 5");
 // #5. Написати функцію getTopSalary(people) яка повертає ім’я найбільш високооплачуваної особи.
 
-// const getTopSalary = (people) => {
+function getTopSalary(people) {
+
+  let entries = Object.entries(people);
+  
+  if (entries.length === 0) return null;
   
 
-// // Теперь можно деструктурировать этот массив массивов
-// let [name, value] = people5;
-// let people_5 = { "Іван": 100, "Петро": 300, "Марія": 250 };
-//     return value
-//   };
+  let topSalaryEntry = entries.reduce((maxEntry, currentEntry) => {
+      return currentEntry[1] > maxEntry[1] ? currentEntry : maxEntry;
+  });
+
+ 
+  return topSalaryEntry[0];
+}
+
+let people5 = { "Іван": 100, "Петро": 3000, "Марія": 25000 };
+console.log(getTopSalary(people5)); 
 
 
 
+console.log("Task 6");
 
-// console.log(getTopSalary(people_5)); // Петро
+//#6. Написати функцію countDuplicates яка рахує кількість повторень кожного елемента масива.
+
+function countDuplicates(arr) {
+  return arr.reduce((counts, num) => {
+      counts[num] = (counts[num] || 0) + 1;
+      return counts;
+  }, {});
+}
+
+let arr6 = [2, 2, 2, 2, 3, 3, 7, 4, 4];
+console.log(countDuplicates(arr6));
+// { '2': 4, '3': 2, '4': 2, '7': 1 }
+
+
+console.log("Task 9");
+
+// Написати функцію extend(arr) яка повертає новий об’єкт, що містить усі властивості будь-яких об’єктів, переданих у масиві. Повернений об’єкт має включати перший екземпляр кожної властивості. Якщо елемент масиву не є обʼєктом його слід ігнорувати.
+
+
+
+function extend(arr) {
+  let result = {}; 
+
+  arr.forEach(item => {
+      if (typeof item === 'object' && item !== null) { 
+          for (let key in item) {
+              if (!(key in result)) { 
+                  result[key] = item[key];
+              }
+          }
+      }
+  });
+
+  return result;
+}
+
+let arr9 = [
+  { a: 1, b: 2 },
+  { b: 3, c: 4 },
+  { d: 5 },
+  'not an object',
+  { e: 6, a: 7 }
+];
+
+console.log(extend(arr9));
+// { a: 1, b: 2, c: 4, d: 5, e: 6 }
+
+//
+console.log('Task 10')
+//Ялинка повертається. Створити функцію makeTree(h) яка повертає обʼєкт з властивістю tree і методом showTree()
+
+function makeTree(h) {
+
+  function createRows(level, maxLevel, rows) {
+      if (level > maxLevel) return rows;
+
+      let spaces = ' '.repeat(maxLevel - level);
+      let stars = '*'.repeat(2 * level + 1);
+      rows.push(spaces + stars + spaces);
+
+      return createRows(level + 1, maxLevel, rows);
+  }
+
+ 
+  let tree = createRows(0, h - 1, []);
+
+
+  // Вернули обьект с три и методом
+  return {
+      tree: tree,
+      showTree: function() {
+          this.tree.forEach(row => console.log(row));
+      }
+  };
+}
+
+let treeObj = makeTree(5);
+treeObj.showTree();
+

@@ -14,6 +14,7 @@
     "start11": "node js/homeworkjs/task11.js",
     "start12": "node js/homeworkjs/task12.js",
     "start13": "node js/homeworkjs/task13.js",
+    "start14": "node js/homeworkjs/task14.js",
 
     "lint": "eslint ."
   },
