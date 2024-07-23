@@ -1,32 +1,78 @@
-let autoReactions = new Promise((resolve, reject) => {
-    const element = document.querySelector('[data-tooltip-id="ucc-10"]');
+const autoReactions = (function() {
+    let intervalId = null;
+    let currentEmoji = '';
+    let clickDelay = 0;
 
-    if (!element) {
-        reject(new Error('Element not found'));
-        return;
+    function isPaletteOpen() {
+        const paletteButton = document.querySelector('[data-tooltip-id="ucc-10"]');
+        return paletteButton && paletteButton.getAttribute('aria-expanded') === 'true';
     }
-
-    const clickY = () => {
-        const ariaExpanded = element.getAttribute('aria-expanded');
-        if (ariaExpanded === 'false') {
-            element.click();
-            resolve('Element was clicked');
-        } else {
-            reject(new Error('Element was not clicked because aria-expanded is not false'));
+    
+    function openReactionsPalette() {
+        const paletteButton = document.querySelector('[data-tooltip-id="ucc-10"][aria-expanded="false"]');
+        if (paletteButton) {
+            paletteButton.click();
         }
     }
-
-    try {
-        clickY();
-    } catch (error) {
-        reject(error);
+    
+    function clickEmoji() {
+        const emojiButton = document.querySelector(`[aria-label="${currentEmoji}"]`);
+        if (emojiButton) {
+            emojiButton.click();
+        }
     }
-});
-
-autoReactions
-    .then((message) => {
-        console.log(message);
-    })
-    .catch((error) => {
-        console.error('Error:', error.message);
+    
+    function startClicking() {
+        if (!isPaletteOpen()) {
+            stopReacting();
+            return;
+        }
+        clickEmoji();
+        intervalId = setInterval(() => {
+            if (!isPaletteOpen()) {
+                stopReacting();
+                return;
+            }
+            clickEmoji();
+        }, clickDelay);
+    }
+    
+    function startReacting(emoji, delay) {
+        currentEmoji = emoji;
+        clickDelay = delay;
+        
+        if (!isPaletteOpen()) {
+            openReactionsPalette();
+            setTimeout(() => {
+                if (isPaletteOpen()) {
+                    startClicking();
+                } else {
+                    throw new Error('Не удалось открыть палетку.');
+                }
+            }, 1000);
+        } else {
+            startClicking();
+        }
+    }
+    
+    function stopReacting() {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+    
+    document.addEventListener('click', function() {
+        if (intervalId && !isPaletteOpen()) {
+            stopReacting();
+        }
     });
+
+    return {
+        startReacting,
+        stopReacting
+    };
+})();
+
+
+// Приклад використання:
+// autoReactions.startReacting('💖', 1000);
+// через деякий час можна викликати autoReactions.stopReacting();
