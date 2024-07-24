@@ -17,7 +17,9 @@
     "start14": "node js/homeworkjs/task14.js",
     "start15": "node js/homeworkjs/task15.js",
     "start16": "node js/homeworkjs/task16.js",
-
+    "start17": "node js/homeworkjs/task17.js",
+    "start18": "node js/homeworkjs/task18.js",
+    "start19": "node ts/homeworkjs/task19.ts",
     "lint": "eslint ."
   },
   "repository": {
